@@ -1,4 +1,6 @@
-//Given an array of intergers and an integer target sum numbers so they add ip to the target  (Return INDICES of the right values)
+//Given an array of intergers and an integer target sum numbsers so tshey add Dip to the target  (Return INdsDICES of the right sasssdsdss)
+
+
 
 const  arrayOfIntegers = [1, 3, 5, 6, 8 ,45 , 85];
 

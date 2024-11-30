@@ -1,6 +1,6 @@
 # **My Project**
 
-I made this simple server with the intention of learning more about the http protocol and how to serve static files, I learned that the browser makes a request for every single file that it loads even if the .js file is liked to my html index the browser will make another request for the js file too and i have to handle that in my simple server too, I also made it hadle different js files no matter how you name it.
+I made this simple server with the intention of learning more about the http protocol and how to serve static files, I learned that the browser makes a request for every single file that it loads even if the .js file is liked to my html index the browser will make another request for the js file too and i have to handle that in my simple server too, I also made it hadle different js files no matter how you name it, The browser will reload when changes are detected on the files inside the /problems directory.
 
 To use it just create a new js file in the problems folder and link it to the index.html in the script tag and the server will handle the requests, no need to touch the server file
 
@@ -11,6 +11,7 @@ To use it just create a new js file in the problems folder and link it to the in
 - Serves static files (HTML, JavaScript) dynamically.
 - Uses environment variables for configuration.
 - Custom error handling for missing files and server issues.
+- Reload the browser when changes are detected.
 
 ---
 

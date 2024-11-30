@@ -3,15 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Main page</title>
 </head>
 <body>
     <h1>How to use</h1>
     <ul>
         <li>Link the .js file that you are gonna use to this html file so the server can handle the request</li>
-        <li>Now you can do your leetcode problems here and watch the logs in the console</li>
+        <li>Now you can do your leetcode problems here and watch the logs in the consolessd d
+        </li>
     </ul>
 
+    <!-- When you create a new js file just link it here -->
+
     <script src="/problems/twoSum.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        const serverDataClient = {
+            serverIp: "localhost",
+            port: 9476
+        }
+        
+        let socket
+        
+        fetch("/api/serverData") 
+        .then(res => res.json())
+        .then(config => {
+            serverDataClient.serverIp = config.serverIp
+            serverDataClient.port = config.port //set the fetched data to the serverDataClient object
+        
+            
+        
+            if(!socket || socket.readyState === WebSocket.CLOSED){ //create the websoket connec tion only if there is not one already active
+                socket = new WebSocket(`ws://${serverDataClient.serverIp}:${serverDataClient.port}`)
+                
+                socket.onmessage = (e) => {
+                    if (e.data === "reload") {
+                        window.location.reload();
+                    }
+                };
+            }
+
+            window.addEventListener("beforeunload", () => {
+                socket.close(); // Close the WebSocket connection when the window/tab is closed
+    
+              });
+        
+        
+            
+        })
+
+        
+        
+
+    </script>
+
+    
 </body>
 </html>

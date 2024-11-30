@@ -3,6 +3,7 @@ import chalk from "chalk"
 import path from "path"
 import fs from "fs"
 import dotenv from "dotenv"
+import {WebSocketServer} from "ws"
 dotenv.config()
 import os from "os"
 
@@ -25,11 +26,77 @@ const getLocalIpAddress = () => {
 const port = process.env.PORT || 3000;
 const HOST = getLocalIpAddress()
 
+let wss;
+
+
+
+const absolutePath = path.resolve() //Absolute path to this directory
+
+// Ws connection
+
+const createWebSocketServer = () => {
+    if (wss) {
+        // Close the existing WebSocket server
+        wss.close(() => {
+            console.log(chalk.yellow("WebSocket server closed"));
+            startWebSocketServer(); // Recreate the server after closing the previous one
+        });
+    } else {
+        startWebSocketServer(); // If no server exists, just create one
+    }
+};
+
+
+
+const startWebSocketServer = () => {
+    wss = new WebSocketServer({ host: HOST, port: 9476 });
+    console.log(chalk.blueBright(`The websocket connection is created on ws://${HOST}:9476`));
+
+    wss.on("connection", (ws) => {
+        console.log(chalk.green("Client connected..."));
+
+        ws.on('close', ()=>{
+            console.log(chalk.red("client disconnected"))
+        })
+        
+    });
+
+
+
+    
+};
+
+
+
+createWebSocketServer()
+
+
+
+const hotRelaodMessage = () =>{
+    wss.clients.forEach((client)=>{
+        
+        if(client.readyState == client.OPEN){
+            client.send("reload")
+        }
+    })
+}
+
+
+
+//Hot reload in problems folder changes
+
+const watchChangesPath = path.join(absolutePath, "problems")
+
+fs.watch(watchChangesPath, {recursive: true}, (e, fileName)=>{
+
+    console.log(chalk.bgGrey(`${fileName} file was changed`))
+    hotRelaodMessage()
+
+})
+
 
 
 //Handle paths of files
-
-const absolutePath = path.resolve()
 
 const setFilePath = (file) =>{
 
@@ -66,6 +133,16 @@ const serverFiles = (req, res) =>{
         filePath = setFilePath(fileName)
         contentType = setContentType(filePath)
 
+
+    }else if(req.url === '/api/serverData' && req.method === "GET"){ //requesting this API to send the data to the front end
+
+        const serverData = {
+            serverIp: getLocalIpAddress(),
+            port: 9476
+        }
+
+        res.writeHead(200, {'Content-Type': "application/json"})
+        return res.end(JSON.stringify(serverData))
 
     }else{
         res.writeHead(404, {"content-type": "text/plain"})
