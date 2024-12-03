@@ -40,3 +40,8 @@ const removeDuplicates = (nums)=>{
 
 
 console.log(removeDuplicates(testCases.case1.nums))
+
+
+
+
+//I will write here the explanation of this code when i get the time in the future
