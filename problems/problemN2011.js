@@ -10,42 +10,37 @@
 
 
 
-const testCases = {
-    case1: {
+const testCases = [
+    {
         operations: ["--X","X++","X++"]
     },
-    case2: {
+    {
         operations: ["++X","++X","X++"]
     },
-    case3: {
+    {
         operations: ["X++","++X","--X","X--"]
     }
-}
+]
 
 
 var finalValueAfterOperations = function(operations) {
 
-    let x = 0
+    let X = 0;
 
-    operations.forEach((op) =>{
-        if(op.includes("++")){
-            x++
-        }else{
-            x--
-        }
-    })
-
-    return x
+    operations.forEach(operation => operation.includes("++") ? X++ : X--)
     
+    return X
 };
 
 
-
-
-console.log(finalValueAfterOperations(testCases.case2.operations))
-
+testCases.forEach((tcase)=>{
+    const result = finalValueAfterOperations(tcase.operations)
+    console.log(result)
+})
 
 //Explanatino of the solution
+
+//Outdated => found better solution 
 
 //In this code i just initialized the variable x and i had to itterate throught the operations array with ForEach i passed each element in the callback function as op and cheked if op inclides
 //++ and if it does i added one to the x values earlier calles and if it falls in the else statement it means that it was -- and i just dicremented the x value by 1, then returned the x variable

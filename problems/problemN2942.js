@@ -13,32 +13,37 @@
 
 
 
-const testCases = {
-    case1: {
+const testCases = [
+    {
         words: ["leet", "code"],
         x: "e"
     },
-    case2: {
+    {
         words: ["abc","bcd","aaaa","cbc"],
         x: "a"
     },
-    case3: {
+    {
         words: ["abc","bcd","aaaa","cbc"],
         x: "z"
     }
-}
+]
 
 
 const findWords = (words, x) =>{
 
-    const values = words.map((word, i)=> word.includes(x) ? i : null)
+   let indexOfWord = [];
+   
+   words.forEach((word, i)=> word.includes(x) ? indexOfWord.push(i) : null)
 
-    return values.filter((v) => v !== null)
+   return indexOfWord
 }
 
 
-console.log(findWords(testCases.case1.words, testCases.case1.x))
+testCases.forEach((tcase)=>{
 
+    const result = findWords(tcase.words, tcase.x)
+    console.log(result)
+})
 
 
 
