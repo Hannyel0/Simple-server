@@ -3,8 +3,8 @@ import chalk from "chalk"
 import path from "path"
 import fs from "fs"
 import dotenv from "dotenv"
-import {WebSocketServer} from "ws"
 dotenv.config()
+import {WebSocketServer} from "ws"
 import os from "os"
 
 //Get the Ip address of the machine
@@ -103,13 +103,15 @@ const setFilePath = (file) =>{
     return path.join(absolutePath, "problems", file)
 }
 
-const setContentType = (path) =>{
+const setContentType = (file) =>{
 
     if(path.includes(".html")){
         return "text/html"
     }else{
         return "application/javascript"
     }
+
+
 }
 
 
