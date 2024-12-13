@@ -4,28 +4,27 @@
 // You can return the answer in any order.
 
  
-//Simple explanation: Given an array of intergers and an integer target sum two numbers so they add up to the target  (Return INDICES of the right numbers)
+//Simple explanation: Given an array of intergers and an integer target add up two numbers so they are equal to the target  (Return INDICES of the right numbers)
 
 
 
-const testCases = {
-    case1: {
+const testCases = [
+    {
         nums: [2,7,11,15],
         target: 9
     },
-    case2: {
+    {
         nums: [3,2,4],
         target: 6
     },
-    case3: {
+    {
         nums: [3,3],
         target: 6
     }
-}
+]
 
 
 const twoSum = (nums, target) =>{
-
 
     const p = nums.map((n, i) => [n, i])
 
@@ -39,17 +38,22 @@ const twoSum = (nums, target) =>{
         const s = p[l][0] + p[r][0]
 
         if(s == target){
+
             return [p[l][1], p[r][1]]
+
         }else if(s < target){
             l++
         }else{
             r--
         }
     }
+    
 }
 
-
-console.log(twoSum(testCases.case1.nums, testCases.case1.nums))
+testCases.forEach((tcase)=>{
+    const result = twoSum(tcase.nums, tcase.target)
+    console.log(result)
+})
 
 
 //Code explanation
@@ -64,3 +68,26 @@ console.log(twoSum(testCases.case1.nums, testCases.case1.nums))
 //checked to see if the sum is equal to the target, if it is it'll return an array with the pointer with the right value [l], [r], and the position of the index wich is [1], but if it wasnt the
 //right values we will chek in the else if statement if the sum if smaller than the target and if it is we will we will add 1 to the left pointer towards the bigger numbers since the array is sorted
 //and if not substract one to the right pointer towards the smaller numbers.
+
+
+// const p = nums.map((n, i) => [n, i])
+
+//     p.sort((a,b) => a[0] - b[0])
+
+//     let l = 0;
+//     let r = p.length - 1
+
+//     while(l < r){
+
+//         const s = p[l][0] + p[r][0]
+
+//         if(s == target){
+
+//             return [p[l][1], p[r][1]]
+
+//         }else if(s < target){
+//             l++
+//         }else{
+//             r--
+//         }
+//     }

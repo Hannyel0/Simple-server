@@ -9,39 +9,46 @@
 // Return k.
 
 
-const testCases = {
-    case1: {
+const testCases = [
+    {
         nums: [1,1,2]
     },
-    case2: {
+    {
         nums: [0,0,1,1,1,2,2,3,3,4]
     },
-    case3: {
+    {
         nums: [0,0,0,1,1,2,2,3,4,5,5]
     }
-}
-
+]
 
 
 const removeDuplicates = (nums)=>{
 
     let k = 0;
-    
-    for(let i = 1; i <= nums.length; i++){
 
-        if(nums[k] !== nums[i]){
+    for(let i = 1; i < nums.length; i++){
+
+        if(nums[i] !== nums[k]){
             k++
+
             nums[k] = nums[i]
         }
+
+    
     }
-    return k;
+
+    return k + 1
+
+    
 
 }
 
 
-console.log(removeDuplicates(testCases.case1.nums))
 
+testCases.forEach((tcase)=>{
 
-
+    const result = removeDuplicates(tcase.nums)
+    console.log(result)
+})
 
 //I will write here the explanation of this code when i get the time in the future
