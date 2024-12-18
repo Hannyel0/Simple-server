@@ -5,6 +5,14 @@
 // A zero-based permutation nums is an array of distinct integers from 0 to nums.length - 1 (inclusive).
 
 
+const testCases = [
+    {
+        nums: [0,2,1,5,3,4]
+    },
+    {
+        nums: [5,0,1,2,3,4]
+    }
+]
 
 
 
@@ -19,3 +27,10 @@ var buildArray = function(nums) {
     
     return ans
 };
+
+
+testCases.forEach((tcase)=>{
+
+    const result = buildArray(tcase.nums)
+    console.log(result)
+})

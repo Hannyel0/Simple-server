@@ -103,7 +103,7 @@ const setFilePath = (file) =>{
     return path.join(absolutePath, "problems", file)
 }
 
-const setContentType = (file) =>{
+const setContentType = (path) =>{
 
     if(path.includes(".html")){
         return "text/html"
